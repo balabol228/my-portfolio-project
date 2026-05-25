@@ -1,2 +1,2 @@
 # my-portfolio-project
-Django web application for Task Management System
+Django web application for Driving school management system
