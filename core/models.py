@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Car(models.Model):
     brand = models.CharField(max_length=64)
     model = models.CharField(max_length=64)
@@ -13,10 +14,10 @@ class Instructor(models.Model):
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
     car = models.ForeignKey(
-        Car, 
-        on_delete=models.SET_NULL, 
-        null=True, 
-        blank=True, 
+        Car,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
         related_name="instructors"
     )
 
@@ -37,13 +38,13 @@ class Student(models.Model):
 class Lesson(models.Model):
     date_time = models.DateTimeField()
     student = models.ForeignKey(
-        Student, 
-        on_delete=models.CASCADE, 
+        Student,
+        on_delete=models.CASCADE,
         related_name="lessons"
     )
     instructor = models.ForeignKey(
-        Instructor, 
-        on_delete=models.CASCADE, 
+        Instructor,
+        on_delete=models.CASCADE,
         related_name="lessons"
     )
 
