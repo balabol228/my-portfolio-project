@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Наші Інструктори{% endblock %}
+{% block content %}
+<div class="bg-white p-4 rounded shadow-sm">
+    <h1 class="mb-4">Список інструкторів</h1>
+    <table class="table table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Ім'я</th>
+                <th>Прізвище</th>
+                <th>Закріплене авто</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for instructor in instructors %}
+            <tr>
+                <td>{{ instructor.first_name }}</td>
+                <td>{{ instructor.last_name }}</td>
+                <td>
+                    {% if instructor.car %}
+                        {{ instructor.car.brand }} {{ instructor.car.model }}
+                    {% else %}
+                        <span class="text-muted">Не закріплено</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3">Інструкторів поки немає.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
