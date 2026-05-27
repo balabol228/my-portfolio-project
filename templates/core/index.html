@@ -3,8 +3,10 @@
 {% block title %}Головна панель | Автошкола{% endblock %}
 
 {% block content %}
-<div class="row g-4">
-    <div class="col-12 col-md-6 col-xl-4">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="row g-4 mb-4">
+    <div class="col-12 col-md-6 col-xl-4" data-aos="fade-up" data-aos-delay="100">
         <div class="card h-100 border-0 shadow-sm bg-white" style="border-radius: 12px;">
             <div class="card-body p-4 text-center">
                 <div class="d-inline-flex p-3 bg-primary bg-opacity-10 rounded-circle mb-3">
@@ -12,12 +14,12 @@
                 </div>
                 <h3 class="display-6 fw-bold text-dark mb-1">{{ num_cars }}</h3>
                 <p class="text-muted text-uppercase small fw-semibold mb-4">Автомобілів у парку</p>
-                <a href="#" class="btn btn-sm btn-primary w-100 py-2 rounded-3">Переглянути список</a>
+                <a href="{% url 'car_list' %}" class="btn btn-sm btn-primary w-100 py-2 rounded-3 fw-medium">Переглянути список</a>
             </div>
         </div>
     </div>
 
-    <div class="col-12 col-md-6 col-xl-4">
+    <div class="col-12 col-md-6 col-xl-4" data-aos="fade-up" data-aos-delay="200">
         <div class="card h-100 border-0 shadow-sm bg-white" style="border-radius: 12px;">
             <div class="card-body p-4 text-center">
                 <div class="d-inline-flex p-3 bg-success bg-opacity-10 rounded-circle mb-3">
@@ -25,12 +27,12 @@
                 </div>
                 <h3 class="display-6 fw-bold text-dark mb-1">{{ num_instructors }}</h3>
                 <p class="text-muted text-uppercase small fw-semibold mb-4">Активних інструкторів</p>
-                <a href="#" class="btn btn-sm btn-success w-100 py-2 rounded-3">Переглянути список</a>
+                <a href="{% url 'instructor_list' %}" class="btn btn-sm btn-success w-100 py-2 rounded-3 fw-medium">Переглянути список</a>
             </div>
         </div>
     </div>
 
-    <div class="col-12 col-md-6 col-xl-4">
+    <div class="col-12 col-md-6 col-xl-4" data-aos="fade-up" data-aos-delay="300">
         <div class="card h-100 border-0 shadow-sm bg-white" style="border-radius: 12px;">
             <div class="card-body p-4 text-center">
                 <div class="d-inline-flex p-3 bg-warning bg-opacity-10 rounded-circle mb-3">
@@ -38,9 +40,61 @@
                 </div>
                 <h3 class="display-6 fw-bold text-dark mb-1">{{ num_students }}</h3>
                 <p class="text-muted text-uppercase small fw-semibold mb-4">Зареєстрованих студентів</p>
-                <a href="#" class="btn btn-sm btn-warning text-white w-100 py-2 rounded-3">Переглянути список</a>
+                <a href="{% url 'student_list' %}" class="btn btn-sm btn-warning text-white w-100 py-2 rounded-3 fw-medium">Переглянути список</a>
             </div>
         </div>
     </div>
 </div>
+
+<div class="row" data-aos="zoom-in" data-aos-delay="400">
+    <div class="col-12 col-xl-8 mx-auto">
+        <div class="card border-0 shadow-sm p-4 bg-white" style="border-radius: 12px;">
+            <h5 class="fw-bold text-dark mb-3">📊 Співвідношення ресурсів автошколи</h5>
+            <div style="position: relative; height: 300px;">
+                <canvas id="analyticsChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const ctx = document.getElementById('analyticsChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Автомобілі', 'Інструктори', 'Студенти'],
+            datasets: [{
+                data: [{{ num_cars }}, {{ num_instructors }}, {{ num_students }}],
+                backgroundColor: [
+                    'rgba(75, 113, 240, 0.85)',
+                    'rgba(46, 204, 113, 0.85)',
+                    'rgba(241, 196, 15, 0.85)'
+                ],
+                borderWidth: 2,
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: { size: 13, weight: 'bold' },
+                        padding: 20
+                    }
+                }
+            },
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        }
+    });
+</script>
 {% endblock %}

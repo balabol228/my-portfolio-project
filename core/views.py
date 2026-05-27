@@ -1,30 +1,31 @@
-from django.shortcuts import render
-from .models import Car, Instructor, Student
+from django.views.generic import TemplateView, ListView
+from core.models import Car, Instructor, Student
 
 
-def index(request):
-    num_cars = Car.objects.count()
-    num_instructors = Instructor.objects.count()
-    num_students = Student.objects.count()
+class IndexView(TemplateView):
+    template_name = 'core/index.html'
 
-    context = {
-        'num_cars': num_cars,
-        'num_instructors': num_instructors,
-        'num_students': num_students,
-    }
-    return render(request, 'core/index.html', context=context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['num_cars'] = Car.objects.count()
+        context['num_instructors'] = Instructor.objects.count()
+        context['num_students'] = Student.objects.count()
+        return context
 
 
-def car_list(request):
-    cars = Car.objects.all()
-    return render(request, 'core/car_list.html', {'cars': cars})
+class InstructorListView(ListView):
+    model = Instructor
+    template_name = 'core/instructor_list.html'
+    context_object_name = 'instructors'
 
 
-def instructor_list(request):
-    instructors = Instructor.objects.all()
-    return render(request, 'core/instructor_list.html', {'instructors': instructors})
+class StudentListView(ListView):
+    model = Student
+    template_name = 'core/student_list.html'
+    context_object_name = 'students'
 
 
-def student_list(request):
-    students = Student.objects.all()
-    return render(request, 'core/student_list.html', {'students': students})
+class CarListView(ListView):
+    model = Car
+    template_name = 'core/car_list.html'
+    context_object_name = 'cars'
