@@ -9,7 +9,16 @@
             <h4 class="fw-bold text-dark mb-1">🚗 Наш автопарк</h4>
             <p class="text-muted small mb-0">Усі транспортні засоби, доступні для практичних занять</p>
         </div>
-        <a href="/" class="btn btn-sm btn-outline-secondary rounded-3"><i class="fa-solid fa-arrow-left me-2"></i>Назад</a>
+        <div>
+            {% if user.is_authenticated %}
+            <a href="{% url 'car_create' %}" class="btn btn-sm btn-primary rounded-3 me-2">
+                <i class="fa-solid fa-plus me-1"></i> Додати автомобіль
+            </a>
+            {% endif %}
+            <a href="/" class="btn btn-sm btn-outline-secondary rounded-3">
+                <i class="fa-solid fa-arrow-left me-1"></i> Назад
+            </a>
+        </div>
     </div>
 
     <div class="table-responsive">
@@ -19,6 +28,9 @@
                     <th class="ps-3">Марка / Модель</th>
                     <th>Держ. номер</th>
                     <th>Статус</th>
+                    {% if user.is_authenticated %}
+                    <th class="text-end pe-4">Дії</th>
+                    {% endif %}
                 </tr>
             </thead>
             <tbody>
@@ -29,10 +41,21 @@
                     </td>
                     <td><span class="badge bg-light text-dark border font-monospace px-2 py-1">{{ car.license_plate }}</span></td>
                     <td><span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-1.5">Активний</span></td>
+                    
+                    {% if user.is_authenticated %}
+                    <td class="text-end pe-3">
+                        <a href="{% url 'car_update' car.pk %}" class="btn btn-sm btn-outline-warning rounded-3 me-1" title="Редагувати">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+                        <a href="{% url 'car_delete' car.pk %}" class="btn btn-sm btn-outline-danger rounded-3" title="Видалити">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                    </td>
+                    {% endif %}
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="3" class="text-center py-5 text-muted">
+                    <td colspan="{% if user.is_authenticated %}4{% else %}3{% endif %}" class="text-center py-5 text-muted">
                         <i class="fa-solid fa-folder-open display-6 mb-3 d-block text-secondary"></i>
                         Автомобілі ще не додані в базу даних.
                     </td>
