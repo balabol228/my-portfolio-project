@@ -20,3 +20,10 @@
 1. Клонуйте репозиторій:
 ```bash
 git clone [https://github.com/balabol228/django-volt-dashboard.git](https://github.com/balabol228/django-volt-dashboard.git)
+
+## 🚀 Деплой проєкту
+Повноцінно працюючу версію проєкту можна переглянути за посиланням: [Інформаційна система автошколи](https://autoschool-project.onrender.com)
+
+**Тестовий користувач для перевірки функціоналу:**
+* **Логін:** "user"
+* **Пароль:** "user12345"
