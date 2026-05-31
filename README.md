@@ -1,2 +1,29 @@
-# my-portfolio-project
-Django web application for Driving school management system
+# Driving School Management System
+
+Сучасна веб-система для автоматизації та керування процесами в автошколі. Проєкт реалізований на базі Django із використанням професійного шаблону дизайну Volt Bootstrap 5.
+
+## Технологічний стек
+- **Backend:** Python 3.x, Django Framework
+- **Database:** SQLite3
+- **Frontend:** HTML5, CSS3, Bootstrap 5 (Volt Admin Dashboard)
+- **Code Quality:** PEP 8, Flake8 compliance
+- **Testing:** Django TestCase (Unit-тести)
+
+## Функціонал проєкту
+- **Головна панель (Dashboard):** Відображення повної аналітики та динамічної статистики бази даних (кількість активних студентів, інструкторів та автомобілів у парку).
+- **Керування автопарком:** Облік транспортних засобів автошколи.
+- **Персонал та Студенти:** Окремі модулі для моніторингу викладацького складу та обліку зареєстрованих учнів.
+- **Архітектура коду:** Проєкт побудований на базі **Class-Based Views (CBV)**, що забезпечує перевикористання коду та легку масштабованість.
+
+## Як запустити проєкт локально
+
+1. Клонуйте репозиторій:
+```bash
+git clone [https://github.com/balabol228/django-volt-dashboard.git](https://github.com/balabol228/django-volt-dashboard.git)
+
+## 🚀 Деплой проєкту
+Повноцінно працюючу версію проєкту можна переглянути за посиланням: [Інформаційна система автошколи](https://autoschool-project.onrender.com)
+
+**Тестовий користувач для перевірки функціоналу:**
+* **Логін:** "user"
+* **Пароль:** "user12345"

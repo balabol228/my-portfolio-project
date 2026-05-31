@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %} {% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto mt-5">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h3 class="mb-4">{% if object %}Оновити{% else %}Додати{% endif %} інструктора</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button type="submit" class="btn btn-success">Зберегти</button>
+                    <a href="{% url 'instructor_list' %}" class="btn btn-outline-secondary">Скасувати</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
